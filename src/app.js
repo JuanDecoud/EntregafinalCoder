@@ -6,7 +6,9 @@ import mongooseConnect from './config/mongodb.config.js';
 initializePassport()
 api.initializeAPP()
 mongooseConnect()
+
 const io = api.app.get('socketio')
+
 io.on('connection' , (socket)=>{
     console.log("New Client Connected")
     socket.on ('productList' , async result =>{
