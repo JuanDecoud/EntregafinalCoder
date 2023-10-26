@@ -15,6 +15,7 @@ if (!localStorage.getItem('usuario')) {
 }
 
 socket.on ('updateMessages' ,messages =>{
+    console.log("hola")
     let divProducts = document.getElementById('messengerBox')
         divProducts.innerHTML=''
         for ( data of messages) {
