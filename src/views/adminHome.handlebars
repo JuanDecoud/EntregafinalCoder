@@ -1,0 +1,45 @@
+{{>nav}}
+<div class ="container">
+    <h1>Lista De Productos</h1>
+</div>
+<div id="listaProductos" class = "container pt-4">
+    <div class ="container my-4 border border-1 border-black">
+        {{#if user}}
+            <h4>Benvenido </h5>
+            <h5>{{user.name}} {{user.lastName}}</h5>
+        {{/if}}
+    </div>
+    <div class = "d-flex flex-wrap">
+        {{#each products.docs}}
+                <div class="card mx-2 my-2" >
+                    <form action="/products/{{this._id}}?_method=DELETE"  method="post">
+                        <img class="card-img-top" src={{this.linkThubnail}} alt="Card image cap" style="object-fit: cover;">
+                        <ul  class="list-group list-group-flush">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="list-group-item">Envase: {{this.container}}</p>
+                            <p class="list-group-item">Litros: {{this.liters}}</p>
+                            <p class="list-group-item text-warning">$ {{this.price}}</p>
+                            <div class ="list-group-item col-6 "> 
+                                <div class="input-group mb-3  mx-2 col-6">
+                            <div class ="container">
+                                <button id="btnCart" type="submit" class ="btn btn-sm btn-danger">Delete</button>
+                            </div>
+                        </ul>
+                    </form>
+                    <div>
+                        <form action="/views/products/details" method ="post" class ="mx-2">
+                            <input type="hidden" name="productId" value={{this._id}}>
+                            <button id="btnCart" type="submit" class ="btn btn-sm btn-danger my-2 mx-2">Update</button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+    </div>
+    <a href="{{products.prevLink}}">Anterior</a>
+    <a href="{{products.nextLink}}">Siguiente</a>
+   
+</div>
+
+
+
+

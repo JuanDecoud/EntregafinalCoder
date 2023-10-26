@@ -1,0 +1,41 @@
+<div class = "d-flex flex-column align-items-center  mx-4 shadow-none  bg-light rounded cartHeight">
+    <div class = "d-flex flex-column  mx-4 aling-content-center   ">
+    {{#each cart.products}}
+        <div class=" d-flex flex-row my-2 border-bottom  shadow-sm  rounded mx-2 bg divCart" >
+            <div class ="container my-2">
+                <img class="img1 " src={{product.linkThubnail}} alt="Card image cap" style="object-fit: cover;">
+            </div>
+            <div class ="d-flex flex-column mx-4 my-2  ">
+                <h4>Product</h4>
+                <h6>{{product.name}}</h6>
+            </div>
+            <div class ="d-flex flex-column mx-4 my-2 ">
+                <h4>Quantity</h4>
+                <h6>{{quantity}}</h6>
+            </div>
+            <div class ="d-flex flex-column mx-4 my-2 ">
+                <h4>Price</h4>
+                <h6>${{product.price}}</h6>
+            </div>
+            <div class ="d-flex flex-column mx-4 my-2 ">
+                <h4>Price</h4>
+                <h6>${{product.price}}</h6>
+            </div>
+            <div class ="d-flex flex-column mx-2 my-2  ">
+                <form method="post" action="/carts/{{cartuserid}}/product/{{product._id}}?_method=delete"  >
+                    <button class ="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    {{/each}}
+        <div class ="d-flex flex-column mx-2 my-2  ">
+            <form method="get" action="/views/userCart"  >
+                <button class ="btn btn-sm btn-danger">
+                    Continue
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
