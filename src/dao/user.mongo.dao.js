@@ -1,3 +1,4 @@
+
 import userModel from   '../dao/models/user.model.js'
 
 export default  class UserDao {
@@ -39,6 +40,15 @@ export default  class UserDao {
         }
     }
     delete = async (id) => await this.dao.delete(id)
+
+    deleteLastConnection = async (lastConnection)=>{
+        try {
+            await userModel.deleteMany ({lastConnection :lastConnection})
+            
+        } catch (error) {
+            
+        }    
+    }
     
     findbyuserName = async (value)=>{
         

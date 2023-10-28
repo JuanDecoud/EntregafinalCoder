@@ -24,5 +24,17 @@ export default class UserController {
         }
     }
 
+    getUsers = async (req,res)=>{
+        try {
+            let result = await services.userService.getAll()
+            let userDto = new UserDTO(result)
+            console.log (userDto)
+            res.status(200).json(result)
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({error : 'error'})
+        }
+    }
+
     
 }

@@ -3,6 +3,7 @@ import local from 'passport-local'
 import { encrypt, validatePassword } from '../utils/utils.js'
 import GitHubStrategy from 'passport-github2'
 import services from '../services/index.js'
+import moment from "moment"
 
 const LocalStrategy = local.Strategy
 
@@ -56,12 +57,14 @@ const initializePassport = () => {
         usernameField: 'username'
     }, async(username, password, done) => {
         try {
-            const user = await services.userService.findbyuserName(username)
+            let user = await services.userService.findbyuserName(username)
             if (!user ) {
                 return done(null, false)
             }
 
             if (!validatePassword(password, user)) return done(null, false)
+            user.lastConnection =moment().format('DD/MM/YYYY')
+            await services.userService.update(user._id , user)
             return done(null, user)
         } catch(err) {
             console.log(err)

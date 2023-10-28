@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import passport from 'passport'
 import UserController from '../controllers/user.controller.js'
+import { comprobateAdmin, comprobateLoggueUser, comprobateUser } from '../middlewares/user.middleware.js'
 
 const userController = new UserController()
 const user = Router ()
@@ -24,9 +25,8 @@ user.get('/logout', (req, res) => {
     })
 })
 
-user.get(`/current` , userController.getCurrentUser)
-
-
+user.get(`/current` ,comprobateLoggueUser,comprobateAdmin, userController.getCurrentUser)
+user.get (`/` ,comprobateLoggueUser,comprobateAdmin, userController.getUsers)
 
 
 

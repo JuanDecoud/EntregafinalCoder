@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema({
     status: Boolean,
     category: String,
     linkThubnail : String,
+    owner : mongoose.Schema.Types.ObjectId
 })
 
 productSchema.plugin(mongoosePaginate)
