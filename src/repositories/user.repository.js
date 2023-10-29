@@ -9,6 +9,7 @@ export default class UserRepository {
     delete = async (id) => await this.dao.delete(id)
     findbyuserName = async (value )=>await this.dao.findbyuserName(value)
     paginate = async (filter , filterOptions)=>await this.dao.paginate(filter ,filterOptions)
+    deleteforInactivity = async () => await this.dao.deleteforInactivity()
 
 }
 

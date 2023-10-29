@@ -1,10 +1,10 @@
-
-import userModel from   '../dao/models/user.model.js'
+import userModel from './models/user.model.js';
+import moment from 'moment';
 
 export default  class UserDao {
     getAll = async ()=> {
         try {
-            let result = userModel.find().lean()
+            let result = await userModel.find().lean()
             return result ;
         } catch (error) {
             console.log(error)
@@ -39,15 +39,35 @@ export default  class UserDao {
             return null
         }
     }
-    delete = async (id) => await this.dao.delete(id)
-
-    deleteLastConnection = async (lastConnection)=>{
+    delete = async (id) => {
         try {
-            await userModel.deleteMany ({lastConnection :lastConnection})
-            
+            let result = await userModel.findByIdAndDelete(id)
+            return result
         } catch (error) {
-            
-        }    
+            console.log(error)
+            return null
+        }
+    }
+
+    verificateInactivity =  (user)=>{
+        let days = 0 ;
+        let result = moment(user.lastConnection ,`DD/MM/YYYY` ).fromNow()
+        return result
+    }
+
+    deleteforInactivity = async ()=>{
+        try {
+           let users= await userModel.find().lean()
+           users.forEach( async user => {
+                let result = this.verificateInactivity(user)
+                if (result === "2 days ago" && user.category != 'Admin') await userModel.deleteOne({_id : user._id})
+           });
+
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+        
     }
     
     findbyuserName = async (value)=>{

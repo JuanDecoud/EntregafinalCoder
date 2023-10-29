@@ -1,11 +1,13 @@
 import { Router } from 'express'
-import productdb from '../dao/models/product.model.js'
-import cartModel from '../dao/models/cart.model.js'
 import { comprobateLoggueUser , comprobateAdmin, comprobateUser} from '../middlewares/user.middleware.js'
 import CartController from '../controllers/cart.controller.js'
-let cartController = new CartController()
 import ProductController from '../controllers/products.controllers.js'
+import UserController from '../controllers/user.controller.js'
+
+
+let cartController = new CartController()
 let productController = new ProductController ()
+let userController = new UserController ()
 
 const viewRouter = Router ()
 
@@ -18,7 +20,7 @@ viewRouter.get('/userCart',comprobateLoggueUser , comprobateUser,cartController.
 viewRouter.get('/products' , comprobateLoggueUser , productController.showHomeProducts )
 viewRouter.get('/realtimeproducts' , async(req,res) =>{res.render('realTimeProductos')})
 viewRouter.get ('/cartModify', comprobateLoggueUser,comprobateUser,cartController.showCarttoModify)
-
+viewRouter.get ('/userManager', userController.userManager )
 
 
 
