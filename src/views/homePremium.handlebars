@@ -1,4 +1,4 @@
-{{>nav}}
+{{>premiumNav}}
 <div id="listaProductos" class = "container pt-4">
     <div class ="container my-4  shadow-sm  rounded p-4">
         {{#if user}}
@@ -18,7 +18,7 @@
                                     <h5 class="card-title">{{this.name}}</h5>
                                     <p class="list-group-item my-2">Envase: {{this.container}}</p>
                                     <p class="list-group-item">Litros: {{this.liters}}</p>
-                                    <p class="list-group-item text-green">$ {{this.price}} </p>
+                                    <p class="list-group-item text-green">$ {{this.price}}</p>
                                     <input type="hidden" name="productId" value={{this._id}}>
                                     <input type="hidden" name="cartId" value={{this.cartId}}>
                                 </div>
@@ -45,7 +45,7 @@
                                         <h5 class="card-title">{{this.name}}</h5>
                                         <p class="list-group-item my-2">Envase: {{this.container}}</p>
                                         <p class="list-group-item">Litros: {{this.liters}}</p>
-                                        <p class="list-group-item text-green">$ {{this.price}} </p>
+                                        <p class="list-group-item text-green">$ {{this.price}}</p>
                                         <input type="hidden" name="productId" value={{this._id}}>
                                         <input type="hidden" name="cartId" value={{this.cartId}}>
                                     </div>
@@ -69,7 +69,6 @@
     <a href="{{products.nextLink}}">Siguiente</a>
    
 </div>
-
 
 
 

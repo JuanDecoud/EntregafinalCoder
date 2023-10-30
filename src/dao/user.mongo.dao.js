@@ -69,6 +69,23 @@ export default  class UserDao {
         }
         
     }
+
+    fyndInactiveUsers =async ()=>{
+        let inactiveUsers = []
+        try {
+            let users= await userModel.find().lean()
+            users.forEach( async user => {
+                let result = this.verificateInactivity(user)
+                if (result >= "2 days ago" && user.category!= 'Admin') inactiveUsers.push(user)
+            });
+
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+        
+        return inactiveUsers ;
+     }
     
     findbyuserName = async (value)=>{
         

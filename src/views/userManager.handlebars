@@ -20,8 +20,9 @@
                         </form>
                     </td>
                     <td class ="text-center">
-                        <input id="${{}}"type="hidden" value ="{{_id}}" name = "userId">
-                        <button id ="btnModify" class = "btn btn-sm btn-danger">Modificar</button>
+                        <button id ="btnModal{{this._id}}" type="button" class="btn  btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                            Modify
+                        </button>
                     </td>
                 </tr>
             {{/each}}
@@ -34,6 +35,53 @@
                 </button>
             </form>
        </div>
+    </div>
+{{#each result}}
+    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer ">
+                    <form class ="row container-sm" action="/user?_method=PUT" method ="post">
+                        <div class ="col col-12 ">
+                            <div class="input-group mb-3">
+                                <div class="input-group-text">
+                                    <label class="input-group-text" for="inputGroupSelect01{{this._id}}">Options</label>
+                                </div>
+                                <select class="form-select" id="inputGroupSelect01{{this._id}}" name="category">
+                                    <option selected value ="null" name="category">Choose...</option>
+                                    <option value="Premium" name="category">Premium</option>
+                                    <option value="Admin" name="category">Admin</option>s
+                                    <option value="User" name="category">User</option>
+                                </select>
+                                <input id ="{{this._id}}" type="hidden" value ="{{this._id}}" name="userid">
+                            </div>
+                        </div>
+                        <div class ="row">
+                            <div class ="col my-4 ">
+                                <button class ="btn btn-sm btn-danger " type="submit">
+                                    Save Changes
+                                </button>
+                            </div>
+                            <div class ="col my-4  ">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div>
+{{/each}}
+    <div class ="container-sm">
+        <form action="/views/inactiveUsers" method="get">
+            <button class ="btn btn-sm bg-danger text-white">
+                Inactive Users
+            </button>
+        </form>
     </div>
 </div>
 

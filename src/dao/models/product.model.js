@@ -18,10 +18,19 @@ const productSchema = new mongoose.Schema({
     status: Boolean,
     category: String,
     linkThubnail : String,
-    owner : mongoose.Schema.Types.ObjectId
+    owner :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'users'
+    } 
 })
 
 productSchema.plugin(mongoosePaginate)
+
+
+productSchema.pre('findOne',  function() {
+    this.populate(`owner`)
+})
+
 
 
  const productModel = mongoose.model (productCollection ,productSchema)

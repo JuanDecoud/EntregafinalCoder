@@ -20,7 +20,7 @@ export default class productControllers {
                 let validate = await Services.productService.findbyAttribute("code",code)
                 
                 if (validate.length ===0){
-                    let newProduct = {name,container,description,brand,price,liters,code,stock,status :true,category ,linkThubnail:'/'+req.file.filename}
+                    let newProduct = {name,container,description,brand,price,liters,code,stock,status :true,category ,linkThubnail:'/'+req.file.filename,owner:req.session.passport.user}
                     await Services.productService.create (newProduct)
                     let products = await Services.productService.getAll()
                     let io = req.app.get('socketio')
@@ -99,11 +99,11 @@ export default class productControllers {
     showHomeProducts = async (req,res)=> {
         let user = null
         user = await services.userService.getById(req.session.passport.user)
-        if(user.category === "user"){
+        if(user.category === "User"){
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
-                let filterOptions= {limit : 3 , page : page  , lean :true}
+                let filterOptions= {limit : 3 , page : page  , lean :true }
                 let products = await services.productService.paginate({}, filterOptions)
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
                /// agregando productos
@@ -118,12 +118,13 @@ export default class productControllers {
             }
 
         }
-        else {
+        else if (user.category ===`Admin` ) {
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
-                let filterOptions= {limit : 3 , page : page  , lean :true}
+                let filterOptions= {limit : 3 , page : page  , lean :true , populate :  'owner'}
                 let products = await services.productService.paginate({}, filterOptions)
+                console.log(products.docs[0].owner)
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
                /// agregando productos
                products.docs.forEach(element => {
@@ -132,6 +133,26 @@ export default class productControllers {
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
                 res.render ('adminHome' , {products ,user} )
+            }catch (err){
+                res.json ({status : "error" , message : err.message })
+            }
+        }
+        else {
+            try{
+                let page = req.query.page || 1
+                let cartId = user.cartId|| null
+                let filterOptions= {limit : 6 , page : page  , lean :true  }
+                let products = await services.productService.paginate({}, filterOptions)
+                console.log(products)
+
+               /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
+               /// agregando productos
+               products.docs.forEach(element => {
+                    element.cartId= cartId
+                });
+                products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
+                products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
+                res.render ('homePremium' , {products ,user} )
             }catch (err){
                 res.json ({status : "error" , message : err.message })
             }

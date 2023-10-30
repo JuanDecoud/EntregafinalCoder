@@ -25,4 +25,5 @@ user.get (`/` ,comprobateLoggueUser,comprobateAdmin, userController.getUsers)
 user.delete ('/'   ,userController.deleteInactiveUsers) 
 user.delete (`/:uid` , userController.deleteUser )
 user.put(`/` , userController.updateCategory)
+
 export default user

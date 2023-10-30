@@ -33,10 +33,22 @@ const comprobateAdmin = async (req,res,next)=>{
     }
 }
 
+const validateforAddproducts = async (req,res,next)=>{
+    let user =await services.userService.getById(req.session.passport.user)
+    try {
+        if(user.category === 'Premium' || user.category ==="Admin") return next()
+        else res.status(404).json ({message:'Only Admin have permission for this area'})
+    } catch (error) {
+        console.log(error)
+
+    }
+}
+
+
 const comprobateUser = async (req,res,next)=>{
     let user = await services.userService.getById(req.session.passport.user)
     try {
-        if(user.category === 'user') return next()
+        if(user.category === 'User') return next()
         else res.status(404).json ({message:'Only User have permission for this area'})
     } catch (error) {
         console.log(error)
@@ -44,4 +56,4 @@ const comprobateUser = async (req,res,next)=>{
     }
 }
 
-export {validateUser , comprobateLoggueUser , comprobateAdmin,comprobateUser}
+export {validateUser , comprobateLoggueUser , comprobateAdmin,comprobateUser ,validateforAddproducts}

@@ -2,31 +2,6 @@
 
 let btnmodify = document.getElementById("btnModify")
 
+let doc = document.getElementById("inputGroupSelect01653e5e290dff417408cedb70")
 
-
-
-btnmodify.addEventListener("click",async()=>{
-   const { value: category } = await Swal.fire({
-        title: 'Select field validation',
-        input: 'select',
-        inputOptions: {
-          'Categorys': {
-            admin :`Admin`,
-            premium :`Premium`,
-            user :`User`
-          }
-        },
-        inputPlaceholder: 'Select a category',
-        showCancelButton: true
-    
-      })
-
-      await fetch(`localhost:${8080}/user`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({category})
-      }).catch(err => console.error)
-      
-} )
+console.log(doc)

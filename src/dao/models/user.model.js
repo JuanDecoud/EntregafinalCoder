@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-let userCollection = "Users"
+let userCollection = "users"
 
 const userSchema = new mongoose.Schema({
     name : String ,
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     category : {
         type:String,
-        default : "user"
+        default : "User"
     },
     status : {
         type:Boolean,

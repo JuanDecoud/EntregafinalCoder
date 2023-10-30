@@ -1,0 +1,34 @@
+<div class ="container-fluid">
+    <div class ="container-sm mx-auto my-4">
+        <table class="table table-lg table-hover table-bordered ">
+            <thead class ="text-center">
+                <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Last Conecction</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each result}}
+                <tr>
+                    <td>{{this.userName}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.lastConnection}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+       </table>
+        <div class ="container-sm my-4">
+            <form action="/user/{{this._id}}?_method=delete" method="post">
+                <button type ="submit" class = "btn btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+       <div class ="container sm">
+            <form action="/views/products" method ="get">
+                <button  type ="submit" class ="btn btn-m btn-danger">
+                    Back
+                </button>
+            </form>
+       </div>
+    </div>
+</div>   

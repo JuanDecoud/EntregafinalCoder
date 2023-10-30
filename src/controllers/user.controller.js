@@ -6,13 +6,25 @@ export default class UserController {
 
 
     updateCategory = async (req,res)=>{
-        let data = req.body.category
-        await services.userService.update()
+        try {
+            console.log(req.body)
+            let data = {
+                category : req.body.category
+            }
+            let id = req.body.userid
+            await services.userService.update(id, data)
+            res.redirect(`/views/userManager`)
+
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({error : 'error'})
+        }
     }
 
     userManager = async (req,res)=>{
         try {
             let result = await services.userService.getAll()
+            console.log(result)
             res.render(`userManager` , {result})
         } catch (error) {
             console.log(error)
@@ -61,6 +73,16 @@ export default class UserController {
             res.status(404).json({error : 'error'})
         }
     }
+
+   showInactiveUsers = async (req,res)=>{
+        try {
+            let result = await services.userService.fyndInactiveUsers()
+            res.render(`inactiveUsers` , {result})
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({error : 'error'})
+        }
+   }
 
     deleteUser = async (req,res)=>{
         try {

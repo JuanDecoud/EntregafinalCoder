@@ -5,12 +5,17 @@ import UserDTO from '../dto/user.dto.js'
 import CustomError from '../services/errors/custom_errors.js'
 import EErros from '../services/errors/enums.js'
 import errors from '../services/errors/info.js'
+import mongoose from 'mongoose'
 
 export default class CartController {
 
   createCart = async(req,res)=>{
+
       let productId = req.body.productId
       let quantity = req.body.quantity
+      console.log("esto es" +productId)
+
+ 
       let user = services.userService.getById(req.session.passport.user)
       try {
         let result = await services.cartService.create(
@@ -23,6 +28,7 @@ export default class CartController {
               ]
           }
         )
+        
         if(!user.cartId)await services.userService.update(req.session.passport.user,{cartId:result._id})
         res.status(200).redirect('/views/products')
       }catch (err){
@@ -35,12 +41,14 @@ export default class CartController {
       const productId = req.params.pid
       const cartId = req.params.cid
       let quantity = req.body.quantity || 1
+
    
       if (productId!=undefined && cartId != undefined){
           let validateId = comprobateMongoId(productId)
           if (validateId=== true){
               try{
                   let cartdb = await services.cartService.getById(cartId)
+                  console.log(cartdb)
                   let productdb = await services.productService.getById(productId)
                   if (!productdb) CustomError.createError({name : "Cart No exist" , cause :errors.cartError ,message :"Error triying to update cart", code: EErros.CART_NOT_EXIST})/*res.status(400).json ({status : ' Fail' , Message : 'Product does not exist'})*/
                   if (!cartdb)res.status(400).json ({status : ' Fail' , Message : ' Cart does not exist'})

@@ -10,6 +10,7 @@ export default class UserRepository {
     findbyuserName = async (value )=>await this.dao.findbyuserName(value)
     paginate = async (filter , filterOptions)=>await this.dao.paginate(filter ,filterOptions)
     deleteforInactivity = async () => await this.dao.deleteforInactivity()
+    fyndInactiveUsers = async () => await this.dao.fyndInactiveUsers()
 
 }
 
