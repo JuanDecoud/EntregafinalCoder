@@ -25,7 +25,7 @@ export default class productDao {
 
   getById = async (id)=>{
     try {
-      let result = await productModel.findById(id)
+      let result = await productModel.findOne({"_id": id}).populate().lean()
       return result 
     } catch (error) {
       console.log(error)
@@ -72,6 +72,8 @@ export default class productDao {
       return null
     }
   }
+
+
 
   productsMocking =async (req,res) => {
     try {

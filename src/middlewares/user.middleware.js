@@ -1,6 +1,7 @@
 import userModel  from '../dao/models/user.model.js'
 import services from '../services/index.js'
 
+import AccountType from '../config/accountStatus.js'
 
 const validateUser = async(req,res,next)=>{
     let userName = req.body.userName 
@@ -48,7 +49,7 @@ const validateforAddproducts = async (req,res,next)=>{
 const comprobateUser = async (req,res,next)=>{
     let user = await services.userService.getById(req.session.passport.user)
     try {
-        if(user.category === 'User') return next()
+        if(user.category === AccountType.normal || user.category===AccountType.premium) return next()
         else res.status(404).json ({message:'Only User have permission for this area'})
     } catch (error) {
         console.log(error)

@@ -24,7 +24,6 @@ export default class UserController {
     userManager = async (req,res)=>{
         try {
             let result = await services.userService.getAll()
-            console.log(result)
             res.render(`userManager` , {result})
         } catch (error) {
             console.log(error)
@@ -56,7 +55,6 @@ export default class UserController {
         try {
             let result = await services.userService.getAll()
             let userDto = new UserDTO(result)
-            console.log (userDto)
             res.status(200).json(result)
         } catch (error) {
             console.log(error)

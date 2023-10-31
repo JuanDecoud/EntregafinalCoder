@@ -1,17 +1,29 @@
-<nav class="navbar  navbar-danger bg-danger justify-content-between h-25 ">
-  <form class="form-inline" action="/views/products" method="get">
-    <button class=" border border-1 border-white btn btn-m btn-danger-success mx-2 my-2 my-sm-0" type="submit">Home</button>
-  </form>
-{{#if user}}
-  <form class="form-inline" action="/user/logout" method="get">
-    <button class=" border border-1 border-white btn btn-m btn-danger-success mx-2 my-2 my-sm-0" type="submit">Logout</button>
-  </form>
-  <form class="form-inline" action="/views/userCart" method="get">
-    <button class=" border border-1 border-white btn btn-m btn-danger-success mx-2 my-2 my-sm-0" type="submit">Show Cart</button>
-  </form>
-  {{else }}
-  <form class="form-inline" action="/views/login" method="get">
-    <button class=" border border-1 border-white btn btn-m btn-danger-success mx-2 my-2 my-sm-0" type="submit">LogIn</button>
-  </form>
-{{/if}}
-</nav>
+
+<div class ="container-fluid bg-danger p-3">
+    {{#unless user}}
+        <div class ="d-flex  flex-row  ">
+            <div class ="d-inline-flex  col-6 my-2 mx-2">
+                <form  class ="mx-2" action="/views/register" method ="get">
+                    <button class ="btn btn-sm btn-danger border border-1 border-white">Register</button>
+                </form>
+            </div>
+    {{/unless}}
+    {{#if user}}
+        <div class ="d-flex  flex-row  ">
+            <div class ="d-inline-flex  col-6 my-2 mx-2">
+                <form  class ="mx-2" action="/views/products" method ="get">
+                    <button class ="btn btn-sm btn-danger border border-1 border-white">Home</button>
+                </form>
+            </div>
+            <div class ="d-inline-flex mx-2   col-6 my-2 justify-content-end">
+                <form class="form-inline " action="/user/logout" method="get">
+                    <button class=" border border-1 border-white btn btn-sm btn-danger " type="submit">Log Out</button>
+                </form>
+                <form class="form-inline mx-4 " action="/views/userCart" method="get">
+                    <button class=" border border-1 border-white btn btn-sm btn-danger " type="submit">Show Cart</button>
+                </form>
+            </div>
+        </div>
+    {{/if}}
+    </div>
+</div>

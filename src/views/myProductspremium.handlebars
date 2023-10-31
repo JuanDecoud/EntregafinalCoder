@@ -1,0 +1,32 @@
+{{>premiumNav}}
+<div id="listaProductos" class = "container pt-4">
+    <div class = "d-flex flex-wrap justify-content-center my-4 ">
+        {{#each products.docs}}
+            {{#if premiumStatus}}
+                <form  action="/carts/{{this.cartId}}/products/{{this._id}}"  method="post">
+                    <div class="d-flex flex-wrap my-4" >
+                        <div class ="d-flex flex-row justify-content-center  shadow-sm  rounded mx-2 ">
+                            <div class ="container-sm ">
+                                <div class ="container-sm mx-o">
+                                    <img class="card-img-top img1 my-2" src={{this.linkThubnail}} alt="Card image cap" style="object-fit: cover;">
+                                    <h5 class="card-title">{{this.name}}</h5>
+                                    <p class="list-group-item my-2">Envase: {{this.container}}</p>
+                                    <p class="list-group-item">Litros: {{this.liters}}</p>
+                                    <p class="list-group-item text-green">$ {{this.price}}</p>
+                                    <input type="hidden" name="productId" value={{this._id}}>
+                                    <input type="hidden" name="cartId" value={{this.cartId}}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{/if}}
+            {{/each}}
+    </div>
+    <a href="{{products.prevLink}}">Anterior</a>
+    <a href="{{products.nextLink}}">Siguiente</a>
+   
+</div>
+
+
+

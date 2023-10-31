@@ -16,12 +16,14 @@ viewRouter.get ('/login' , (req,res)=>{res.render ('login')})
 viewRouter.get ('/register' , (req,res)=>{res.render ('register')})
 viewRouter.get ('/loginError', (req,res)=>{res.render ('errors/loginError')})
 viewRouter.get('/addProduct',comprobateLoggueUser ,validateforAddproducts,(req,res)=>{res.render('addProducts')})
-viewRouter.get('/userCart',comprobateLoggueUser , validateforAddproducts,cartController.showUserCart )
+viewRouter.get('/userCart',comprobateLoggueUser , comprobateUser,cartController.showUserCart )
 viewRouter.get('/products' , comprobateLoggueUser , productController.showHomeProducts )
 viewRouter.get('/realtimeproducts' , async(req,res) =>{res.render('realTimeProductos')})
-viewRouter.get ('/cartModify', comprobateLoggueUser,comprobateUser,cartController.showCarttoModify)
+viewRouter.get ('/cartModify', comprobateLoggueUser,validateforAddproducts,cartController.showCarttoModify)
 viewRouter.get ('/userManager',comprobateLoggueUser,comprobateAdmin, userController.userManager )
 viewRouter.get(`/inactiveUsers`,comprobateLoggueUser ,comprobateAdmin, userController.showInactiveUsers)
+viewRouter.get ('/myProductspremium',comprobateLoggueUser,validateforAddproducts, productController.showPremiumProduct )
+
 
 
 

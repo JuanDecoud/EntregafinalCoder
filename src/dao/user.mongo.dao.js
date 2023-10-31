@@ -1,6 +1,10 @@
 import userModel from './models/user.model.js';
 import moment from 'moment';
 
+import Email from '../utils/emailService.js';
+
+let emailservices = new Email()
+
 export default  class UserDao {
     getAll = async ()=> {
         try {
@@ -56,11 +60,15 @@ export default  class UserDao {
     }
 
     deleteforInactivity = async ()=>{
+      
         try {
-           let users= await userModel.find().lean()
+           let users= await this.fyndInactiveUsers()
+           console.log(users)
            users.forEach( async user => {
-                let result = this.verificateInactivity(user)
-                if (result === "2 days ago" && user.category != 'Admin') await userModel.deleteOne({_id : user._id})
+                if (user.category != 'Admin') {
+                    await userModel.deleteOne({_id : user._id})
+                    emailservices.inactivityEmail(user.userName)
+                }
            });
 
         } catch (error) {

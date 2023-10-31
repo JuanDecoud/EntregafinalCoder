@@ -65,9 +65,13 @@
                {{/if}} 
             {{/each}}
     </div>
-    <a href="{{products.prevLink}}">Anterior</a>
-    <a href="{{products.nextLink}}">Siguiente</a>
-   
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{{products.prevLink}}">Anterior</a></li>
+            <li class="page-item"><a class="page-link" href="{{products.nextLink}}">Siguiente</a></li>
+        </ul>
+    </nav>
+
 </div>
 
 

@@ -7,8 +7,8 @@ const cartsRouter = Router ()
 const cartController = new CartController ()
 
 
-cartsRouter.post ('/:cid/products/:pid' ,comprobateLoggueUser,validateforAddproducts ,cartController.updateCart )
-cartsRouter.post ('/',comprobateLoggueUser,validateforAddproducts,cartController.createCart)
+cartsRouter.post ('/:cid/products/:pid' ,comprobateLoggueUser,comprobateUser ,cartController.updateCart )
+cartsRouter.post ('/',comprobateLoggueUser,comprobateUser,cartController.createCart)
 cartsRouter.post('/:cid/purchase' ,comprobateLoggueUser,validateforAddproducts ,cartController.finishPurchase )
 cartsRouter.get('/:cid',comprobateLoggueUser,comprobateAdmin,cartController.findCart)
 cartsRouter.delete('/:cid/product/:pid',comprobateLoggueUser,validateforAddproducts ,cartController.deleteProduct)

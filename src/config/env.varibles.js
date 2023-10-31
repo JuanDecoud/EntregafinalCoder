@@ -7,5 +7,7 @@ dotenv.config()
     static dbUser = process.env.DB_USER
     static port = process.env.PORT_SERVER
     static dbName=process.env.DB_NAME
+    static email=process.env.MAIL_ADDRESS
+    static epassword=process.env.MAIL_PASSWORD
 
 }

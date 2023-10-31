@@ -1,7 +1,10 @@
 import UserDTO from '../dto/user.dto.js'
 import services from '../services/index.js'
 import Services from '../services/index.js'
+import Email from '../utils/emailService.js'
 import uploader from '../utils/multer.product.js'
+
+let emailService = new Email ();
 
 
 export default class productControllers {
@@ -84,12 +87,12 @@ export default class productControllers {
     }
 
     deleteProduct = async (req,res)=>{
+        
         let id = req.params.pid
        try {
-            let result = await Services.productService.delete(id)
-            let products = await Services.productService.getAll()
-            let io = req.app.get('socketio')
-            io.emit('updateProducts' , products)
+            let result =await Services.productService.getById(id)
+            if (result.owner.category==="Premium"){ emailService.premiumProductnotification(result.name , result.owner.userName)}
+            await Services.productService.delete(id)
             res.status(200).send ("Sucess: Product Deleted")
        }catch (err){
             res.json ({status:'error' , message: err.message })
@@ -110,8 +113,14 @@ export default class productControllers {
                products.docs.forEach(element => {
                     element.cartId= cartId
                 });
+
+                do {
+                    
+                } while (products);
+              
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
-                products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
+                products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "             
+                console.log(products)
                 res.render ('home' , {products ,user} )
             }catch (err){
                 res.json ({status : "error" , message : err.message })
@@ -122,9 +131,8 @@ export default class productControllers {
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
-                let filterOptions= {limit : 3 , page : page  , lean :true , populate :  'owner'}
+                let filterOptions= {limit : 3 , page : page  , lean :true }
                 let products = await services.productService.paginate({}, filterOptions)
-                console.log(products.docs[0].owner)
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
                /// agregando productos
                products.docs.forEach(element => {
@@ -141,9 +149,8 @@ export default class productControllers {
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
-                let filterOptions= {limit : 6 , page : page  , lean :true  }
+                let filterOptions= {limit : 3 , page : page  , lean :true  }
                 let products = await services.productService.paginate({}, filterOptions)
-                console.log(products)
 
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
                /// agregando productos
@@ -158,6 +165,26 @@ export default class productControllers {
             }
         }
 
+    }
+
+    showPremiumProduct = async (req, res) => {
+        try{
+            let page = req.query.page || 1
+            let filterOptions= {limit : 6 , page : page  , lean :true, populate :"owner"  }
+            let products = await services.productService.paginate({}, filterOptions)
+            let user = await services.userService.getById(req.session.passport.user)
+            products.docs.forEach(element => {
+                if(element.owner.category ===user.category && element.owner.userName ===user.userName ){
+                    element.premiumStatus = true
+                }
+            });
+            
+            products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
+            products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
+            res.render ('myProductspremium' , {products } )
+        }catch (err){
+            res.json ({status : "error" , message : err.message })
+        }
     }
 
     showPorductDetail = async(req,res)=>{
