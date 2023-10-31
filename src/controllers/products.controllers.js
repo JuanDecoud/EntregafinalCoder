@@ -114,9 +114,7 @@ export default class productControllers {
                     element.cartId= cartId
                 });
 
-                do {
-                    
-                } while (products);
+          
               
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "             
