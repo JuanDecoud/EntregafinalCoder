@@ -3,6 +3,7 @@ import services from '../services/index.js'
 import Services from '../services/index.js'
 import Email from '../utils/emailService.js'
 import uploader from '../utils/multer.product.js'
+import paginateEstile from '../utils/paginate.js'
 
 let emailService = new Email ();
 
@@ -108,18 +109,18 @@ export default class productControllers {
                 let cartId = user.cartId|| null
                 let filterOptions= {limit : 3 , page : page  , lean :true }
                 let products = await services.productService.paginate({}, filterOptions)
+                let array = paginateEstile(products.totalPages)
+                products.array = array 
+
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
                /// agregando productos
                products.docs.forEach(element => {
                     element.cartId= cartId
                 });
 
-          
-              
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "             
-                console.log(products)
-                res.render ('home' , {products ,user} )
+                res.render ('home' , {products ,user , array} )
             }catch (err){
                 res.json ({status : "error" , message : err.message })
             }
@@ -136,9 +137,11 @@ export default class productControllers {
                products.docs.forEach(element => {
                     element.cartId= cartId
                 });
+                let array = paginateEstile(products.totalPages)
+                products.array = array 
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
-                res.render ('adminHome' , {products ,user} )
+                res.render ('adminHome' , {products ,user ,array} )
             }catch (err){
                 res.json ({status : "error" , message : err.message })
             }
@@ -155,9 +158,11 @@ export default class productControllers {
                products.docs.forEach(element => {
                     element.cartId= cartId
                 });
+                let array = paginateEstile(products.totalPages)
+                products.array = array 
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
-                res.render ('homePremium' , {products ,user} )
+                res.render ('homePremium' , {products ,user ,array} )
             }catch (err){
                 res.json ({status : "error" , message : err.message })
             }

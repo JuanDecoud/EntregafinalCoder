@@ -34,8 +34,27 @@
                 </div>
             {{/each}}
     </div>
-    <a href="{{products.prevLink}}">Anterior</a>
-    <a href="{{products.nextLink}}">Siguiente</a>
+    <div class = "container my-4  shadow-sm  rounded p-4" >
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="{{products.prevLink}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only"></span>
+                    </a>
+                </li>
+                    {{#each array}}
+                        <li class="page-item "><a class="page-link" href="/views/products?page={{this.page}}">{{this.page}}</a></li>
+                    {{/each }}
+                 <li class="page-item">
+                    <a class="page-link" href="{{products.nextLink}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
    
 </div>
 

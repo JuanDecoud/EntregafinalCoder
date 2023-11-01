@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-body{
+body,html{
     height: 100%;
-    background-color: rgb(248, 239, 239);
+    width: auto;
 }
 .nav1 {
     height: 25%;
@@ -23,6 +23,12 @@ body{
 
 .divCart:hover {
     background-color: rgb(235, 128, 142);
+  }
+
+  .foot {
+    height: 15%;
+    width: auto;
+   
   }
   
 
