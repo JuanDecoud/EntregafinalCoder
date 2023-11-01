@@ -19,7 +19,7 @@ viewRouter.get('/addProduct',comprobateLoggueUser ,validateforAddproducts,(req,r
 viewRouter.get('/userCart',comprobateLoggueUser , comprobateUser,cartController.showUserCart )
 viewRouter.get('/products' , comprobateLoggueUser , productController.showHomeProducts )
 viewRouter.get('/realtimeproducts' , async(req,res) =>{res.render('realTimeProductos')})
-viewRouter.get ('/cartModify', comprobateLoggueUser,validateforAddproducts,cartController.showCarttoModify)
+viewRouter.get ('/cartModify', comprobateLoggueUser,comprobateUser,cartController.showCarttoModify)
 viewRouter.get ('/userManager',comprobateLoggueUser,comprobateAdmin, userController.userManager )
 viewRouter.get(`/inactiveUsers`,comprobateLoggueUser ,comprobateAdmin, userController.showInactiveUsers)
 viewRouter.get ('/myProductspremium',comprobateLoggueUser,validateforAddproducts, productController.showPremiumProduct )

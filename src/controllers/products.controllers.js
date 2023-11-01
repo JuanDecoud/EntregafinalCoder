@@ -4,6 +4,7 @@ import Services from '../services/index.js'
 import Email from '../utils/emailService.js'
 import uploader from '../utils/multer.product.js'
 import paginateEstile from '../utils/paginate.js'
+import AccountType from '../config/accountStatus.js'
 
 let emailService = new Email ();
 
@@ -92,7 +93,7 @@ export default class productControllers {
         let id = req.params.pid
        try {
             let result =await Services.productService.getById(id)
-            if (result.owner.category==="Premium"){ emailService.premiumProductnotification(result.name , result.owner.userName)}
+            if (result.owner.category===AccountType.premium){ emailService.premiumProductnotification(result.name , result.owner.userName)}
             await Services.productService.delete(id)
             res.status(200).send ("Sucess: Product Deleted")
        }catch (err){
@@ -103,7 +104,7 @@ export default class productControllers {
     showHomeProducts = async (req,res)=> {
         let user = null
         user = await services.userService.getById(req.session.passport.user)
-        if(user.category === "User"){
+        if(user.category === AccountType.normal){
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
@@ -126,7 +127,7 @@ export default class productControllers {
             }
 
         }
-        else if (user.category ===`Admin` ) {
+        else if (user.category ===AccountType.admin ) {
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null

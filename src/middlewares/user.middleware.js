@@ -26,7 +26,7 @@ const comprobateLoggueUser = async (req,res,next)=> {
 const comprobateAdmin = async (req,res,next)=>{
     let user =await services.userService.getById(req.session.passport.user)
     try {
-        if(user.category === 'Admin') return next()
+        if(user.category === AccountType.admin) return next()
         else res.status(404).json ({message:'Only Admin have permission for this area'})
     } catch (error) {
         console.log(error)
@@ -37,7 +37,7 @@ const comprobateAdmin = async (req,res,next)=>{
 const validateforAddproducts = async (req,res,next)=>{
     let user =await services.userService.getById(req.session.passport.user)
     try {
-        if(user.category === 'Premium' || user.category ==="Admin") return next()
+        if(user.category === AccountType.premium|| AccountType.admin) return next()
         else res.status(404).json ({message:'Only Admin have permission for this area'})
     } catch (error) {
         console.log(error)
