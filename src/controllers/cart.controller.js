@@ -185,7 +185,10 @@ export default class CartController {
             if (productsatTicket.length > 0){
                 
               let result = await  services.ticketService.create(productsatTicket ,userDto)
-              res.status(200).json({status : "ok" , message : 'ticket creado con exito' , ticket : result})
+              let user = userDto
+              console.log({ticket:result})
+             // res.status(200).json({status : "ok" , message : 'ticket creado con exito' , ticket : result})
+             res.render('finalPurchase', result )
             }
             else {
                 //res.status(404).json({status : "Error" , message : CustomError.createError({name : "No Stock" , cause :errors.stockError(nonStockProducts) ,message :"Error triying to update cart", code: EErros.CART_NOT_EXIST}) })

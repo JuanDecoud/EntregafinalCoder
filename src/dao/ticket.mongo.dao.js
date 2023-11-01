@@ -39,6 +39,7 @@ export default  class TicketMongoDAO {
             let payment = await this.calculatePayment(arrayProducts)
             let data = { code : code ,purchase_datetime : date,amount : payment,purchase: email}
             let ticket = await ticketModel.create(data)
+
             return ticket
             
         } catch (error) {
