@@ -48,8 +48,9 @@ export default class CartController {
           if (validateId=== true){
               try{
                   let cartdb = await services.cartService.getById(cartId)
-                  console.log(cartdb)
+
                   let productdb = await services.productService.getById(productId)
+                  
                   if (!productdb) CustomError.createError({name : "Cart No exist" , cause :errors.cartError ,message :"Error triying to update cart", code: EErros.CART_NOT_EXIST})/*res.status(400).json ({status : ' Fail' , Message : 'Product does not exist'})*/
                   if (!cartdb)res.status(400).json ({status : ' Fail' , Message : ' Cart does not exist'})
                   if (cartdb && productdb){
@@ -185,7 +186,10 @@ export default class CartController {
             if (productsatTicket.length > 0){
                 
               let result = await  services.ticketService.create(productsatTicket ,userDto)
-              res.status(200).json({status : "ok" , message : 'ticket creado con exito' , ticket : result})
+              let user = userDto
+              console.log({ticket:result})
+             // res.status(200).json({status : "ok" , message : 'ticket creado con exito' , ticket : result})
+             res.render('finalPurchase', result )
             }
             else {
                 //res.status(404).json({status : "Error" , message : CustomError.createError({name : "No Stock" , cause :errors.stockError(nonStockProducts) ,message :"Error triying to update cart", code: EErros.CART_NOT_EXIST}) })

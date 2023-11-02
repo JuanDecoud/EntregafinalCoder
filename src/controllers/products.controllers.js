@@ -151,7 +151,7 @@ export default class productControllers {
             try{
                 let page = req.query.page || 1
                 let cartId = user.cartId|| null
-                let filterOptions= {limit : 3 , page : page  , lean :true  }
+                let filterOptions= {limit : 4 , page : page  , lean :true , populate :"owner" }
                 let products = await services.productService.paginate({}, filterOptions)
 
                /// esto lo hago para agregar el valor del carrito y poder mandarlo por post para conservarlo y poder seguir 
@@ -161,6 +161,13 @@ export default class productControllers {
                 });
                 let array = paginateEstile(products.totalPages)
                 products.array = array 
+                products.docs.forEach(element => {
+                    if(element.owner.category !=user.category && element.owner.userName !=user.userName ){
+                        element.noselfProduct = true
+                        
+                    }
+                });
+
                 products.nextLink = products.hasNextPage?`/views/products?page=${products.nextPage}` : " "
                 products.prevLink = products.hasPrevPage? `/views/products?page=${products.prevPage}` : " "
                 res.render ('homePremium' , {products ,user ,array} )
@@ -177,6 +184,7 @@ export default class productControllers {
             let filterOptions= {limit : 6 , page : page  , lean :true, populate :"owner"  }
             let products = await services.productService.paginate({}, filterOptions)
             let user = await services.userService.getById(req.session.passport.user)
+
             products.docs.forEach(element => {
                 if(element.owner.category ===user.category && element.owner.userName ===user.userName ){
                     element.premiumStatus = true
