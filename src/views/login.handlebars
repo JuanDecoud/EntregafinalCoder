@@ -1,17 +1,14 @@
 <div class ="d-flex justify-content-center align-items-start my-4   h-100">
     <div class ="d-flex flex-column justify-content-center align-items-center my-4  shadow-sm p-4 border border-1 my-4 w-50  border border-1 border-black">
-        <div class ="d-flex flex-wrap justify-content-center ">
             <img  class ="logimg"src="/logo.png" alt="">
-        </div>
-        <div class ="d-flex justify-content-center  col-12 ">
-            <form  class ="p-4  col-8 my-4"action="/user/login" method="post">
-                <div class="input-group  mb-3">
-                    <span class="input-group-text p-0" id="basic-addon1"><img class ="iconLogin p-2" src="/icon.png" alt=""></span>
-                    <input  required name="username" type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
+            <form  class ="p-4   my-4 "action="/user/login" method="post">
                 <div class="input-group mb-3">
-                    <span class="input-group-text p-0" id="basic-addon1"><img class ="iconLogin p-2" src="/candado.png" alt=""></span>
-                    <input  required  name="password" type="password" class="form-control form-control-lg " id="exampleInputPassword1" placeholder="Password">   
+                    
+                    <input  required name="username" type="email" class="form-control form-control-lg fontinput" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="input-group mb-3 ">
+                    
+                    <input  required  name="password" type="password" class="form-control form-control-lg fontinput " id="exampleInputPassword1" placeholder="Password">   
                 </div>
                 <div class="form-check my-2 mx-2">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -21,7 +18,6 @@
                     <button type="submit" class="btn btn-outline-primary my-2 mx-2">Iniciar Sesión</button>
                 </div>
             </form>
-        </div>
     </div>
 </div>
 
