@@ -7,6 +7,7 @@
 body,html{
     height: 100%;
     width: auto;
+    background: #ace1f5;
 }
 .nav1 {
     height: 25%;
@@ -30,5 +31,18 @@ body,html{
     width: auto;
    
   }
+
+.logimg {
+  
+        width: 50%;
+        height: auto;
+      
+}
+
+.iconLogin {
+    padding: 0;
+    height: 60px;
+    width: 60px;
+}
   
 

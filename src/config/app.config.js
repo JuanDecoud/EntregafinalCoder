@@ -1,8 +1,7 @@
 import  express  from 'express';
-import productRouter from '../routers/products.router.js'
-import cartsRouter from '../routers/carts.router.js'
+
 import viewRouter from '../routers/views.router.js'
-import messengerRouter from '../routers/messengerRouter.js'
+
 import userRouter from '../routers/user.router.js';
 import handlebars from 'express-handlebars'
 import methodOverride from 'method-override'
@@ -36,10 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./src/public'))
 app.use(methodOverride('_method'))
 /// routers------------------------------------------------
-app.use ('/products' , productRouter)
-app.use ('/carts' , cartsRouter)
 app.use ('/views' , viewRouter)
-app.use('/messenger', messengerRouter)
 app.use('/user', userRouter)
 /// engine-------------------------------------------------
 app.engine('handlebars' , handlebars.engine())
