@@ -10,9 +10,10 @@ const userSchema = new mongoose.Schema({
     address : String,
     userName : String ,
     password: String ,
-    cartId : {
-        type :String ,
-        default: null
+    tradeRepresentative : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user",
+        default : null
     },
     category : {
         type:String,
@@ -25,8 +26,21 @@ const userSchema = new mongoose.Schema({
     lastConnection : {
         type:String,
         default : null
-    }
+    },
 
+    companies : {
+       type : [
+            {
+                company : {
+                    _id : false,
+                    type : mongoose.Types.ObjectId,
+                    ref : "company"
+                }
+            }
+           
+       ],
+       default : [] 
+    }
 })
 
 
