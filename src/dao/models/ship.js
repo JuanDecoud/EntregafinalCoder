@@ -9,5 +9,5 @@ const shipSchema = new mongoose.Schema({
 
 })
 
-const shipModel = mongoose.model(shipCollection)
+const shipModel = mongoose.model(shipCollection,shipSchema)
 export default shipModel ;

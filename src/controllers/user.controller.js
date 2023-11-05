@@ -1,13 +1,47 @@
 import services from "../services/index.js"
 import UserDTO from "../dto/user.dto.js"
+import AccountType from '../config/accountStatus.js'
 
 
 export default class UserController {
 
+    showHomebyCategory = async (req,res)=>{
+        let userID = req.session.passport.user 
+        try {
+            let user = await services.userService.getById(userID)
+            if (user.category == AccountType.admin) {res.render('adminViews/homeAdmin')}
+            else if (user.category === AccountType.comercial) {res.render('homeComercial' )}
+            else {res.render('homeCliente')}
+        } catch (error) {
+            res.status(404).json({message: error.message})
+        }
+    }
+
+    showaddOrderform = async (req,res)=>{
+        let userID = req.session.passport.user 
+        try {
+            let user = await services.userService.getById(userID)
+           
+            if (user.category == AccountType.admin) {
+                user.isadmin =true
+                res.render('ingresarPedido' , {user})
+            }
+            else if (user.category === AccountType.comercial) {
+            }
+            else {
+                user.isclient=true
+                res.render('ingresarPedido',{user})
+            }
+        } catch (error) {
+            res.status(404).json({message: error.message})
+        }
+
+    }
+
 
     updateCategory = async (req,res)=>{
         try {
-            console.log(req.body)
+            
             let data = {
                 category : req.body.category
             }

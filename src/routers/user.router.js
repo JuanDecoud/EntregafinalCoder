@@ -6,9 +6,7 @@ import { comprobateAdmin, comprobateLoggueUser, comprobateUser } from '../middle
 const userController = new UserController()
 const user = Router ()
 
-user.post('/login', passport.authenticate('login', { failureRedirect: '/views/loginError'}), async (req, res) => {
-    res.redirect('/views/homeClient')
-})
+user.post('/login', passport.authenticate('login', { failureRedirect: '/views/loginError'}), userController.showHomebyCategory)
 user.post ('/register', passport.authenticate('register' ,{failureRedirect :'/views/register' , failureMessage: true}),async (req,res)=> {res.redirect('/views/login')})
 
 user.get('/logout', (req, res) => {

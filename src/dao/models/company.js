@@ -7,13 +7,18 @@ const companySchema = new mongoose.Schema({
     cuit : String ,
     ships : {
         type : [
-            {
-                _id : false ,
-                ship : mongoose.Schema.Types.ObjectId ,
-                ref : "ship"
+             {
+                ship : {
+                    _id : false ,
+                    type : mongoose.Schema.Types.ObjectId ,
+                    ref:'ship'
+                }
             }
         ],
         default : []
     }
-
 })
+
+const companyModel =  mongoose.model(companyCollection,companySchema)
+
+export default companyModel

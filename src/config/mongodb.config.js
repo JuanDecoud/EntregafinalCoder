@@ -3,7 +3,7 @@ import variables from '../config/env.varibles.js'
 
 const mongooseConnect = async()=> {
     try {
-        await mongoose.connect(`${variables.dbUrl1}${variables.dbUser}:${variables.dbPassword}${variables.dbUrl2}/${variables.dbName}`)
+        await mongoose.connect(`mongodb+srv://zonapedidos:Juanjo2031@zonacomun.f6snu.mongodb.net/zonacomun`)
         console.log("Succes conected to db")
         
     } catch (error) {
