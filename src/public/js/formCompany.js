@@ -13,3 +13,24 @@ btnModal.addEventListener('click', ()=>{
         div.appendChild(newelement)
     });
 })
+
+
+/*
+<script>
+var grocery_list = {}
+
+function addGroceryItem(form) {
+  grocery_list[form.item.value] = {category: form.category.value, price: form.price.value};
+  return false;
+}
+</script>
+
+<form onsubmit="return addGroceryItem(this)">
+    <input name="item"><br>
+    <input name="category"><br>
+    <input name="price"><br>
+    <input type="submit" value="Add item">
+    <input type="button" value="Show list" onclick="console.log(grocery_list)">
+</form>
+
+*/
