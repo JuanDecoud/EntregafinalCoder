@@ -3,6 +3,7 @@ import  express  from 'express';
 import viewRouter from '../routers/views.router.js'
 import contactRouter from '../routers/contact.router.js';
 import agencyRouter from '../routers/agency.router.js'
+import companyRouter from '../routers/company.router.js'
 
 import userRouter from '../routers/user.router.js';
 import handlebars from 'express-handlebars'
@@ -41,6 +42,7 @@ app.use ('/views' , viewRouter)
 app.use('/user', userRouter)
 app.use('/contact', contactRouter)
 app.use('/agency', agencyRouter)
+app.use('/company', companyRouter)
 /// engine-------------------------------------------------
 app.engine('handlebars' , handlebars.engine())
 app.set('views','./src/views')

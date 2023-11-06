@@ -46,6 +46,12 @@ body,html{
     width: 50px;
 }
 
+.iconform {
+    padding: 0;
+    height: 25px;
+    width: 25px;
+}
+
 .iconNav {
     height: 100px;
     width: 150px;
