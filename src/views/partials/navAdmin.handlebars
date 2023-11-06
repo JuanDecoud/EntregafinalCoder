@@ -9,14 +9,18 @@
         <li class=" nav-item h-100 navItem  mx-2 border-bottom">
           <a class="nav-link   text-dark" aria-current="page" href="/views/ingresarPedidos">Ingresar Pedido</a>
         </li>
-        <li class=" nav-item  navItem mx-2 border-bottom">
-        <form action="">
-          <a class="  nav-link text-dark " href="/user/pedidos">Alta Cliente</a>
-        </form>
+        <li class="nav-item dropdown border-bottom navItem">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Altas
+          </a>
+          <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item navItem border-bottom" href="/views/addContact">Alta de contacto</a></li>
+            <li><a class="dropdown-item navItem border-bottom" href="/views/addAgency">Alta de agencia</a></li>
+            <li><a class="dropdown-item navItem border-bottom" href="#">Alta de buque</a></li>
+            <li><a class="dropdown-item navItem border-bottom" href="#">Alta de empresa</a></li>
+          </ul>
         </li>
-        <li class=" nav-item  navItem mx-2 border-bottom">
-          <a class="  nav-link text-dark " href="/views/pedidos">Alta Buque</a>
-        </li>
+        
       </ul>
     </div>
   </div>

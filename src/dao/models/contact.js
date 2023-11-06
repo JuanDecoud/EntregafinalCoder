@@ -7,6 +7,8 @@ const contactSchema = new mongoose.Schema({
     name : "String",
     lastName : "String",
     cel : "String",
+    contacttype : "String",
+    email : "String"
 
 })
 

@@ -2,8 +2,7 @@
 import UserDao from "../dao/user.mongo.dao.js"
 import UserRepository from "../repositories/user.repository.js";
 
-import AgencyDao from "../dao/company.mongo.dao.js";
-import AgencyRepository from "../repositories/agency.repository.js";
+
 
 import ContactDao from "../dao/contact.mongo.dao.js";
 import ConctacRepository from "../repositories/contact.repository.js";
@@ -11,15 +10,16 @@ import ConctacRepository from "../repositories/contact.repository.js";
 import ShipDao from "../dao/ship.mong.dao.js";
 import ShipRepository from "../repositories/ship.repository.js"
 
-import CompanyDao from "../dao/company.mongo.dao.js";
-import CompanyRepository from "../repositories/company.repository.js"
+import AgencyRepository from "../repositories/agency.repository.js"
+import AgencyDao from "../dao/agency.mongo.dao.js";
+
 
 
 let userService =new UserRepository(new UserDao())
-let agencyServices = new AgencyRepository(new AgencyDao())
 let contactServices = new ConctacRepository(new ContactDao())
 let shipServices = new ShipRepository(new ShipDao())
-let companyDao = new CompanyRepository(new CompanyDao())
+let  agencyService = new AgencyRepository(new AgencyDao())
 
-export default {  userService , agencyServices,contactServices,shipServices,companyDao } 
+
+export default {  userService ,contactServices,shipServices , agencyService } 
 

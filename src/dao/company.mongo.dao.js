@@ -1,6 +1,6 @@
 import companyModel from './models/company.js'
 
-export default  class AgencyDao {
+export default  class CompanyDao {
     getAll = async ()=> {
         try {
             let result = await companyModel.find().lean()
