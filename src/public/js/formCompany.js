@@ -8,6 +8,8 @@ btnModal.addEventListener('click', ()=>{
     inputs.forEach(element => {
         let newelement = document.createElement('input')
         newelement.value=element.value
+        newelement.classList.add('w-50' , 'p-0')
+
         div.appendChild(newelement)
     });
 })
