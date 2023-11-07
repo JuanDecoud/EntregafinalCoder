@@ -1,4 +1,4 @@
-import companyModel from './models/company.js'
+import  companyModel from '../dao/models/company.js'
 
 export default  class CompanyDao {
     getAll = async ()=> {

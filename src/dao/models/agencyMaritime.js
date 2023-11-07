@@ -13,9 +13,7 @@ const agencySchema = new mongoose.Schema({
                     _id : false ,
                     idContact : mongoose.Schema.Types.ObjectId
                 }
-
             }
-
         ],
         default : []
     }
