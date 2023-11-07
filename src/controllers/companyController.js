@@ -6,6 +6,7 @@ export default class CompanyController {
         res.render('adminViews/altadeEmpresa')
     }
 
+<<<<<<< HEAD
 
     addCompany =async (req,res)=>{
         let shipsArray = []
@@ -30,4 +31,6 @@ export default class CompanyController {
        await services.companyService.create(newCompany)
         res.redirect('/views/login')
     }
+=======
+>>>>>>> 388bfa6f01b1d18e20b5b0912cac9b76c566aebc
 }

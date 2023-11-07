@@ -4,7 +4,10 @@ import viewRouter from '../routers/views.router.js'
 import contactRouter from '../routers/contact.router.js';
 import agencyRouter from '../routers/agency.router.js'
 import companyRouter from '../routers/company.router.js'
+<<<<<<< HEAD
 import cors from 'cors'
+=======
+>>>>>>> 388bfa6f01b1d18e20b5b0912cac9b76c566aebc
 
 import userRouter from '../routers/user.router.js';
 import handlebars from 'express-handlebars'
